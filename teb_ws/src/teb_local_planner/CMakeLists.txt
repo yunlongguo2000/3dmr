@@ -31,7 +31,8 @@ message(STATUS "System: ${CMAKE_SYSTEM}")
 ## System dependencies are found with CMake's conventions
 SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${PROJECT_SOURCE_DIR}/cmake_modules)
 message(STATUS "${CMAKE_MODULE_PATH}")
-find_package(Boost REQUIRED COMPONENTS system thread graph)
+
+find_package(Boost REQUIRED COMPONENTS system thread graph filesystem)
 find_package(SUITESPARSE REQUIRED)
 find_package(G2O REQUIRED)
 
@@ -177,6 +178,7 @@ include_directories(include)
 include_directories(
   ${EXTERNAL_INCLUDE_DIRS}
   ${catkin_INCLUDE_DIRS}
+  ${Boost_INCLUDE_DIRS}
 )
 
 ## Build the teb_local_planner library
@@ -201,6 +203,7 @@ add_dependencies(teb_local_planner ${PROJECT_NAME}_generate_messages_cpp)
 target_link_libraries(teb_local_planner
    ${EXTERNAL_LIBS}
    ${catkin_LIBRARIES}
+   ${Boost_LIBRARIES}
 )
 
 
@@ -213,6 +216,7 @@ target_link_libraries(test_optim_node
    teb_local_planner
    ${EXTERNAL_LIBS}
    ${catkin_LIBRARIES}
+   ${Boost_LIBRARIES}
 )
 
 

@@ -33,6 +33,13 @@ find_package(OpenCV REQUIRED
 
 find_package(octomap REQUIRED)
 
+find_package(Boost REQUIRED COMPONENTS filesystem)
+
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(LIBFFI REQUIRED libffi)
+
+find_package(TIFF REQUIRED)
+
 ###################################
 ## catkin specific configuration ##
 ###################################
@@ -60,6 +67,7 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
   ${EIGEN3_INCLUDE_DIR}
   ${OCTOMAP_INCLUDE_DIR}
+  ${Boost_INCLUDE_DIRS}
 )
 
 ## Declare a cpp executable
@@ -182,11 +190,17 @@ target_link_libraries(
 target_link_libraries(
   filters_demo
   ${catkin_LIBRARIES}
+  ${Boost_LIBRARIES}
+  ${LIBFFI_LIBRARIES}
+  ${TIFF_LIBRARIES}
 )
 
 target_link_libraries(
   normal_filter_comparison_demo
   ${catkin_LIBRARIES}
+  ${Boost_LIBRARIES}
+  ${LIBFFI_LIBRARIES}
+  ${TIFF_LIBRARIES}
 )
 
 target_link_libraries(

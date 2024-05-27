@@ -29,7 +29,7 @@ find_package(catkin REQUIRED
     ${CATKIN_PACKAGE_DEPENDENCIES}
 )
 
-find_package(Boost REQUIRED COMPONENTS system)
+find_package(Boost REQUIRED COMPONENTS system filesystem)
 find_package(Eigen3 REQUIRED)
 
 catkin_package(
@@ -62,6 +62,7 @@ add_library(${PROJECT_NAME}_pcl_types
 )
 target_link_libraries(${PROJECT_NAME}_pcl_types
   ${catkin_LIBRARIES}
+  ${Boost_LIBRARIES}
 )
 
 add_library(${PROJECT_NAME}_library
@@ -86,6 +87,7 @@ add_dependencies(${PROJECT_NAME}_library
 
 target_link_libraries(${PROJECT_NAME}_library
   ${catkin_LIBRARIES}
+  ${Boost_LIBRARIES}
   ${PROJECT_NAME}_pcl_types
   pthread
 )
